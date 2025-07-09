@@ -5,7 +5,7 @@ A Model Context Protocol (MCP) server that provides file editing capabilities us
 ## Features
 
 - Edit files using natural language instructions
-- Powered by Morph's `morph-v3-large` model
+- Powered by Morph's LLM (configurable model)
 - Automatic backup creation before edits
 - Graceful error handling for file I/O and API errors
 - MCP-compatible for use with AI IDEs
@@ -28,7 +28,13 @@ export MORPH_BASE_URL=https://your-custom-api.com/v1
 ```
 If not set, defaults to `https://api.morphllm.com/v1`
 
-4. Build the project:
+4. (Optional) Set custom model:
+```bash
+export MORPH_MODEL=your-preferred-model
+```
+If not set, defaults to `morph/morph-v3-large`
+
+5. Build the project:
 ```bash
 npm run build
 ```
@@ -47,7 +53,8 @@ Add this to your `claude_desktop_config.json`:
       "args": ["/path/to/mcp-edit-service/dist/index.js"],
       "env": {
         "MORPH_API_KEY": "your_api_key_here",
-        "MORPH_BASE_URL": "https://your-custom-api.com/v1"
+        "MORPH_BASE_URL": "https://your-custom-api.com/v1",
+        "MORPH_MODEL": "your-preferred-model"
       }
     }
   }
@@ -61,6 +68,7 @@ Configure the MCP server with:
 - Environment: 
   - `MORPH_API_KEY=your_api_key_here`
   - `MORPH_BASE_URL=https://your-custom-api.com/v1` (optional)
+  - `MORPH_MODEL=your-preferred-model` (optional)
 
 ## Available Tools
 
@@ -120,6 +128,7 @@ npm run build
 ```bash
 export MORPH_API_KEY=your_actual_api_key
 export MORPH_BASE_URL=https://your-custom-api.com/v1  # Optional
+export MORPH_MODEL=your-preferred-model  # Optional
 ```
 
 3. **在 Claude Desktop 中配置**:
@@ -132,7 +141,8 @@ export MORPH_BASE_URL=https://your-custom-api.com/v1  # Optional
       "args": ["/absolute/path/to/mcp-edit-service/dist/index.js"],
       "env": {
         "MORPH_API_KEY": "your_actual_api_key",
-        "MORPH_BASE_URL": "https://your-custom-api.com/v1"
+        "MORPH_BASE_URL": "https://your-custom-api.com/v1",
+        "MORPH_MODEL": "your-preferred-model"
       }
     }
   }
