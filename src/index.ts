@@ -120,7 +120,7 @@ class EditFileServer {
 
       // Use Morph's fast apply API to generate the updated code
       const response = await this.morphClient.chat.completions.create({
-        model: "morph-v3-large",
+        model: "morph/morph-v3-large",
         messages: [
           {
             role: "user",
