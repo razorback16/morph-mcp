@@ -23,6 +23,7 @@ const EditFileSchema = z.object({
 class EditFileServer {
   private server: Server;
   private morphClient: OpenAI;
+  private model: string;
 
   constructor() {
     // Initialize Morph client
@@ -32,6 +33,7 @@ class EditFileServer {
     }
 
     const baseURL = process.env.MORPH_BASE_URL || 'https://api.morphllm.com/v1';
+    this.model = process.env.MORPH_MODEL || 'morph/morph-v3-large';
 
     this.morphClient = new OpenAI({
       apiKey: apiKey,
@@ -120,7 +122,7 @@ class EditFileServer {
 
       // Use Morph's fast apply API to generate the updated code
       const response = await this.morphClient.chat.completions.create({
-        model: "morph/morph-v3-large",
+        model: this.model,
         messages: [
           {
             role: "user",
